@@ -6,8 +6,15 @@ laravelで作成したRSSを管理するサービス
 
 ### 環境
 
-- php: 7.2.17
-- laravel: 6.3.0
+```bash
+$ php -v
+PHP 8.1.17 (cli) (built: Mar 14 2023 23:07:43) (ZTS Visual C++ 2019 x64)
+Copyright (c) The PHP Group
+Zend Engine v4.1.17, Copyright (c) Zend Technologies
+
+$ php artisan --version
+Laravel Framework 8.83.27
+```
 
 ### セットアップ
 
