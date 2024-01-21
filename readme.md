@@ -1,10 +1,10 @@
-# Feeduck(フィーダック)
+# Feeduck（フィーダック）
 
-### 概要
+## 概要
 
 laravelで作成したRSSを管理するサービス
 
-### 環境
+## 環境
 
 ```bash
 $ php -v
@@ -16,29 +16,37 @@ $ php artisan --version
 Laravel Framework 8.83.27
 ```
 
-### セットアップ
+## セットアップ
 
-- モジュールのインストール
+### 1. モジュールのインストール
 
 ```shell
 $ yarn install
 $ composer install
 ```
 
-- dbのセットアップ
+### 2. dbのセットアップ
 
 ```shell
 $ php artisan migrate
 ```
 
 
-- 起動
+### 3. 外部サービスのAPIキーの設定
+
+`config/const.php`に取得したAPIキーを設定する
+
+- [Gooラボ](https://labs.goo.ne.jp/)
+- [Aoogleアナリティクス](https://developers.google.com/analytics?hl=ja)
+
+
+### 4. 起動
 
 ```shell
 $ php artisan serve
 ```
 
-### apache(xampp)で起動する方法
+## Ex. Apache(xampp)で起動するhttpd.confの設定例
 
 - httpd.conf
 
@@ -50,7 +58,3 @@ Alias /feeduck "C:/repos/feeduck/public/"
     Require all granted
 </Directory>
 ```
-
-
-
-
