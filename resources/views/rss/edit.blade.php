@@ -55,14 +55,10 @@
 
 		<div>
 			<button type="submit" name="update_info" class="btn btn-outline-secondary">保存</button>
-			<button class="btn btn-outline-secondary" onclick="location.href='./search'">戻る</button>
+			<a class="btn btn-outline-secondary" href="./search">戻る</a>
 			<button class="btn btn-outline-secondary">削除</button>
 		</div>
 	</form>
-
-
-
-
 </div>
 
 @endsection
