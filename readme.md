@@ -45,7 +45,7 @@ $ php artisan migrate
 `config/const.php`に取得したAPIキーを設定する
 
 - [Gooラボ](https://labs.goo.ne.jp/)
-- [Aoogleアナリティクス](https://developers.google.com/analytics?hl=ja)
+- [Googleアナリティクス](https://developers.google.com/analytics?hl=ja)
 
 
 ### 5. 起動
