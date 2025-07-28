@@ -10,9 +10,10 @@ laravelで作成したRSSを管理するサービス
 
 ```bash
 $ php -v
-PHP 8.1.17 (cli) (built: Mar 14 2023 23:07:43) (ZTS Visual C++ 2019 x64)
+PHP 8.2.12 (cli) (built: Oct 24 2023 21:15:15) (ZTS Visual C++ 2019 x64)
 Copyright (c) The PHP Group
-Zend Engine v4.1.17, Copyright (c) Zend Technologies
+Zend Engine v4.2.12, Copyright (c) Zend Technologies
+    with Xdebug v3.3.2, Copyright (c) 2002-2024, by Derick Rethans
 
 $ php artisan --version
 Laravel Framework 8.83.27
@@ -20,21 +21,26 @@ Laravel Framework 8.83.27
 
 ## セットアップ
 
-### 1. モジュールのインストール
+### 1. .envの設定
+
+- .env.exampleをコピーして.envを作成
+- .envを環境に合わせて設定
+
+### 2. モジュールのインストール
 
 ```shell
 $ yarn install
 $ composer install
 ```
 
-### 2. dbのセットアップ
+### 3. dbのセットアップ
 
 ```shell
 $ php artisan migrate
 ```
 
 
-### 3. 外部サービスのAPIキーの設定
+### 4. 外部サービスのAPIキーの設定
 
 `config/const.php`に取得したAPIキーを設定する
 
@@ -42,7 +48,7 @@ $ php artisan migrate
 - [Aoogleアナリティクス](https://developers.google.com/analytics?hl=ja)
 
 
-### 4. 起動
+### 5. 起動
 
 ```shell
 $ php artisan serve
