@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\RssController;
+use App\Http\Controllers\ApiController;
 use App\Http\Controllers\HomeController;
+
 
 Route::redirect('/', '/search');
 
@@ -27,3 +29,7 @@ Route::post('/edit', [RssController::class, 'edit'])->name('edit');
 // 認証
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// API
+Route::get('/api/get', 'ApiController@RssGet');
+Route::get('/api/set', 'ApiController@RssSet');
