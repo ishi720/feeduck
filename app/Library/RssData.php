@@ -20,22 +20,22 @@ class RssData
 
         $rssdata = simplexml_load_string($content);
 
-        $format = RssData::rss_format_get($rssdata);
+        $format = self::rss_format_get($rssdata);
 
         //ATOM
         if($format == "ATOM"){
-            $info_data = RssData::atom_info_get($rssdata);
-            $feed_data = RssData::atom_feed_get($rssdata);
+            $info_data = self::atom_info_get($rssdata);
+            $feed_data = self::atom_feed_get($rssdata);
         }
         //RSS1.0
         elseif($format == "RSS1.0"){
-            $info_data = RssData::rss1_info_get($rssdata);
-            $feed_data = RssData::rss1_feed_get($rssdata);
+            $info_data = self::rss1_info_get($rssdata);
+            $feed_data = self::rss1_feed_get($rssdata);
         }
         //RSS2.0
         elseif($format == "RSS2.0"){
-            $info_data = RssData::rss2_info_get($rssdata);
-            $feed_data = RssData::rss2_feed_get($rssdata);
+            $info_data = self::rss2_info_get($rssdata);
+            $feed_data = self::rss2_feed_get($rssdata);
         }
         else {
             print("FORMAT ERROR\n");exit;
