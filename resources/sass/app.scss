@@ -6,3 +6,75 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+
+#extraction {
+    text-align: center;
+}
+
+#search {
+    padding: 10px;
+    .rss_info_block {
+        margin: 10px;
+        padding: 10px;
+        border: solid 1px gray;
+        .title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+        &.private {
+            background-color: gray;
+        }
+    }
+}
+
+#detail {
+
+    .update_time_area {
+        position: relative;
+        text-align: right;
+        .update_time {
+            background: #f0f0f0;
+            padding: 0 10px;
+            color: gray;
+            text-align: right;
+            display: inline-block;
+        }
+    }
+    .rss_feed {
+        padding: 10px;
+        .feed_block {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: solid 1px gray;
+            .title {
+                font-size: 1.5em;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+#feedlist {
+    padding: 10px;
+    .rss_feed_block {
+        margin: 10px;
+        padding: 10px;
+        border: solid 1px gray;
+        .title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        a {
+            text-decoration: none;
+            color: #000;
+        }
+        img {
+            width: 200px;
+        }
+    }
+}
