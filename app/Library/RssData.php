@@ -5,17 +5,19 @@ namespace app\Library;
 class RssData
 {
     public static function get($url) {
-        $data = array();
-        $rss_url = htmlspecialchars($url,ENT_QUOTES, "UTF-8");
+        $rss_url = htmlspecialchars($url, ENT_QUOTES, "UTF-8");
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-        curl_setopt($ch, CURLOPT_AUTOREFERER, true);
+        $options = [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CONNECTTIMEOUT => 10,
+            CURLOPT_TIMEOUT        => 10,
+            CURLOPT_URL            => $url,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS      => 10,
+            CURLOPT_AUTOREFERER    => true,
+        ];
+        curl_setopt_array($ch, $options);
         $content = curl_exec($ch);
 
         $rssdata = simplexml_load_string($content);
@@ -41,7 +43,7 @@ class RssData
             print("FORMAT ERROR\n");exit;
         }
 
-        $response = array();
+        $response = [];
         $response['error_status'] = "0";
         $response['response_feed_count'] = count($feed_data);
         $response['request_url'] = $rss_url;
@@ -52,16 +54,14 @@ class RssData
         return $response;
     }
 
-
-
-    private static function rss_format_get($rssdata){
-        if($rssdata->entry){
+    private static function rss_format_get($rssdata) {
+        if ($rssdata->entry) {
             //ATOM
             return "ATOM";
-        } elseif ($rssdata->item){
+        } elseif ($rssdata->item) {
             //RSS1.0
             return "RSS1.0";
-        } elseif ($rssdata->channel->item){
+        } elseif ($rssdata->channel->item) {
             //RSS2.0
             return "RSS2.0";
         } else {
@@ -70,23 +70,25 @@ class RssData
         }
     }
     // info_get
-    private static function rss1_info_get($rssdata){
+    private static function rss1_info_get($rssdata) {
+        $data = [];
         foreach ($rssdata->channel as $channel) {
-            $work = array();
+            $work = [];
             foreach ($channel as $key => $value) {
                 $work[$key] = (string)$value;
             }
             //dc
-            foreach ($channel->children('dc',true) as $key => $value) {
+            foreach ($channel->children('dc', true) as $key => $value) {
                 $work['dc:'. $key] = (string)$value;
             }
             $data[] = $work;
         }
         return $data;
     }
-    private static function rss2_info_get($rssdata){
+    private static function rss2_info_get($rssdata) {
+        $data = [];
         foreach ($rssdata->channel as $channel) {
-            $work = array();
+            $work = [];
             foreach ($channel as $key => $value) {
                 $work[$key] = (string)$value;
             }
@@ -94,21 +96,23 @@ class RssData
         }
         return $data;
     }
-    private static function atom_info_get($rssdata){
+    private static function atom_info_get($rssdata) {
+        $data = [];
         foreach ($rssdata as $key => $item){
             if ($key === 'entry') {
                 continue;
             }
-            $work = array();
+            $work = [];
             $work[$key] = (string)$item;
             $data[] = $work;
         }
         return $data;
     }
     // feed_get
-    private static function rss1_feed_get($rssdata){
+    private static function rss1_feed_get($rssdata) {
+        $data = [];
         foreach ($rssdata->item as $item) {
-            $work = array();
+            $work = [];
             foreach ($item as $key => $value) {
                 $work[$key] = (string)$value;
             }
@@ -124,9 +128,10 @@ class RssData
         }
         return $data;
     }
-    private static function rss2_feed_get($rssdata){
+    private static function rss2_feed_get($rssdata) {
+        $data = [];
         foreach ($rssdata->channel->item as $item) {
-            $work = array();
+            $work = [];
             foreach ($item as $key => $value) {
                 $work[$key] = (string)$value;
             }
@@ -146,9 +151,10 @@ class RssData
         }
         return $data;
     }
-    private static function atom_feed_get($rssdata){
+    private static function atom_feed_get($rssdata) {
+        $data = [];
         foreach ($rssdata->entry as $item){
-            $work = array();
+            $work = [];
             foreach ($item as $key => $value) {
                 if( $key == "link"){
                     $work[$key] = (string)$value->attributes()->href;;
