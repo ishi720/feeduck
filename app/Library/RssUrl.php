@@ -27,12 +27,12 @@ class RssUrl
 
         $countRSS = count($phpQuery['link[type=application/rss+xml]']);
         for ($i = 0; $i < $countRSS; $i++) {
-            array_push($rssArray, $phpQuery["link[type=application/rss+xml]:eq(${i})"]->attr('href'));
+            array_push($rssArray, $phpQuery["link[type=application/rss+xml]:eq({$i})"]->attr('href'));
         }
 
         $countAtom = count($phpQuery['link[type=application/atom+xml]']);
         for ($i = 0; $i < $countRSS; $i++) {
-            array_push($rssArray, $phpQuery["link[type=application/atom+xml]:eq(${i})"]->attr('href'));
+            array_push($rssArray, $phpQuery["link[type=application/atom+xml]:eq({$i})"]->attr('href'));
         }
 
         return $rssArray;

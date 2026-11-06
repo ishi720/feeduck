@@ -31,5 +31,5 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // API
-Route::get('/api/get', 'ApiController@RssGet');
-Route::get('/api/set', 'ApiController@RssSet');
+Route::get('/api/get', [ApiController::class, 'RssGet']);
+Route::get('/api/set', [ApiController::class, 'RssSet']);
