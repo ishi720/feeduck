@@ -56,16 +56,6 @@ class RssRegister
         $data = RssData::get($url);
         $rssinfo = $data['response_info'][0];
 
-        if (RssInfo::where('url',$url)) {
-            // $gooKeyword = GooLab::keywordExtraction(
-            //     array_key_exists('title', $rssinfo) ? $rssinfo['title'] : '',
-            //     array_key_exists('description', $rssinfo) ? $rssinfo['description'] : ''
-            // );
-            $gooKeyword = "";
-        } else {
-            $gooKeyword = "";
-        }
-
         if (RssInfo::where('url',$url)->count() >= 1) {
             $info_id = RssInfo::where('url',$url)->pluck('id')[0];
         } else {
@@ -79,7 +69,6 @@ class RssRegister
             'link' => array_key_exists('link', $rssinfo) ? $rssinfo['link'] : '',
             'description' => array_key_exists('description', $rssinfo) ? $rssinfo['description'] : '',
             'rss_version' => $data['rss_format'],
-            //'tag' => $gooKeyword,
             'tag' => '',
             'manual_tags' => '',
             'crawl_flag' => 1,

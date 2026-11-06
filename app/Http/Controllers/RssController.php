@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Library\RssData;
 use App\Library\RssRegister;
 use App\Library\RssUrl;
-use App\Library\GooLab;
 
 use App\RssInfo;
 use App\RssFeed;
