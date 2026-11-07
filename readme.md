@@ -10,13 +10,12 @@ laravelで作成したRSSを管理するサービス
 
 ```bash
 $ php -v
-PHP 8.2.12 (cli) (built: Oct 24 2023 21:15:15) (ZTS Visual C++ 2019 x64)
+PHP 8.3.36 (cli) (built: Oct 20 2026 04:21:11) (ZTS Visual C++ 2019 x64)
 Copyright (c) The PHP Group
-Zend Engine v4.2.12, Copyright (c) Zend Technologies
-    with Xdebug v3.3.2, Copyright (c) 2002-2024, by Derick Rethans
+Zend Engine v4.3.36, Copyright (c) Zend Technologies
 
 $ php artisan --version
-Laravel Framework 8.83.27
+Laravel Framework 13.40.0
 ```
 
 ## セットアップ
