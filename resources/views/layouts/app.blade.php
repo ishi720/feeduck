@@ -14,15 +14,12 @@
     <link rel="apple-touch-icon" href="./apple-touch-icon.png" sizes="180x180">
     <link rel="icon" type="image/png" href="./android-touch-icon.png" sizes="192x192">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Styles / Scripts -->
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{config('const.google_analytics.tracking_id')}}"></script>
