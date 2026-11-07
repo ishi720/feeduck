@@ -16,7 +16,7 @@
 
   @foreach( $feedList as $feed )
     <div class="rss_feed_block">
-      <a target="_brank" href="{{$feed['url']}}">
+      <a target="_blank" href="{{$feed['url']}}">
         <div class="title">{{$feed['title']}}</div>
         <div class="info_title">{!!$feed['info_title']!!}</div>
         <img src="{{$feed['image']}}">
