@@ -2,7 +2,7 @@
 
 namespace App\Library;
 
-use phpQuery;
+use Symfony\Component\DomCrawler\Crawler;
 
 class RssUrl
 {
@@ -20,19 +20,20 @@ class RssUrl
 
         $html = curl_exec($ch);
 
-        // 見出し要素を取得&表示
-        $phpQuery = phpQuery::newDocument($html);
-
-        $rssArray = [];
-
-        $countRSS = count($phpQuery['link[type=application/rss+xml]']);
-        for ($i = 0; $i < $countRSS; $i++) {
-            array_push($rssArray, $phpQuery["link[type=application/rss+xml]:eq({$i})"]->attr('href'));
+        // 取得できなかった場合は空
+        if (!is_string($html) || $html === '') {
+            return [];
         }
 
-        $countAtom = count($phpQuery['link[type=application/atom+xml]']);
-        for ($i = 0; $i < $countRSS; $i++) {
-            array_push($rssArray, $phpQuery["link[type=application/atom+xml]:eq({$i})"]->attr('href'));
+        $crawler = new Crawler($html);
+
+        // RSS → Atom の順にlinkタグのhrefを取得する
+        $rssArray = [];
+        foreach (['application/rss+xml', 'application/atom+xml'] as $type) {
+            $hrefs = $crawler->filter('link[type="' . $type . '"]')->each(
+                fn (Crawler $node) => $node->attr('href')
+            );
+            array_push($rssArray, ...$hrefs);
         }
 
         return $rssArray;

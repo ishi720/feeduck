@@ -5,7 +5,7 @@ namespace App\Library;
 use App\RssInfo;
 use App\RssFeed;
 
-use phpQuery;
+use Symfony\Component\DomCrawler\Crawler;
 
 class RssRegister
 {
@@ -91,16 +91,23 @@ class RssRegister
         foreach($data['response_feed'] as $key => $value){
             //画像の取得
             if ( array_key_exists('content:encoded', $value) ) {
-                $htmldoc = phpQuery::newDocument($value['content:encoded']);
+                $html = $value['content:encoded'];
             } else if ( array_key_exists('description', $value) ) {
-                $htmldoc = phpQuery::newDocument($value['description']);
+                $html = $value['description'];
             } else if ( array_key_exists('content', $value) ) {
-                $htmldoc = phpQuery::newDocument($value['content']);
+                $html = $value['content'];
             } else {
-                $htmldoc = "";
+                $html = '';
             }
 
-            $imglink=$htmldoc->find("img")->attr("src");
+            // 最初のimgタグのsrcを取得（無ければnull）
+            $imglink = null;
+            if ($html !== '') {
+                $img = (new Crawler($html))->filter('img');
+                if ($img->count() > 0) {
+                    $imglink = $img->first()->attr('src');
+                }
+            }
 
             if ( array_key_exists('dc:date', $value) ) {
                $feedDate = date('Y-m-d H:i:s', strtotime($value['dc:date']));
