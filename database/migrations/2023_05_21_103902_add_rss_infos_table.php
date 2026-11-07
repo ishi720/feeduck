@@ -26,9 +26,8 @@ class AddRssInfosTable extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('manual_tags');
-            $table->dropColumn('crawl_flag');
+        Schema::table('rss_infos', function (Blueprint $table) {
+            $table->dropColumn(['manual_tags', 'crawl_flag']);
         });
     }
 }

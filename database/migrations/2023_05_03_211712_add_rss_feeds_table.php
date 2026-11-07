@@ -27,7 +27,7 @@ class AddRssFeedsTable extends Migration
     public function down()
     {
         Schema::table('rss_feeds', function (Blueprint $table) {
-            //
+            $table->dropColumn(['info_id', 'pubDate']);
         });
     }
 }

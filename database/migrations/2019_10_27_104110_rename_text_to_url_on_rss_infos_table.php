@@ -26,7 +26,7 @@ class RenameTextToUrlOnRssInfosTable extends Migration
     public function down()
     {
         Schema::table('rss_infos', function (Blueprint $table) {
-            $table->renameColumn('text', 'url');
+            $table->renameColumn('url', 'text');
         });
     }
 }
