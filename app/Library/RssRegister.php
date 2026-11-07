@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Library;
+namespace App\Library;
 
 use App\RssInfo;
 use App\RssFeed;
