@@ -14,7 +14,7 @@ class ChangeImageStringToTextOnRssFeedsTable extends Migration
     public function up()
     {
         Schema::table('rss_feeds', function (Blueprint $table) {
-            $table->string('image')->change();
+            $table->text('image')->change();
         });
     }
 
@@ -26,7 +26,7 @@ class ChangeImageStringToTextOnRssFeedsTable extends Migration
     public function down()
     {
         Schema::table('rss_feeds', function (Blueprint $table) {
-            $table->text('image')->change();
+            $table->string('image')->change();
         });
     }
 }
