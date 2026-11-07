@@ -52,6 +52,16 @@ $ php artisan migrate
 $ php artisan serve
 ```
 
+## コマンド
+
+### ER図の生成
+
+DBのスキーマから[ER図](docs/er.md)を生成する
+
+```shell
+$ php artisan erd:generate
+```
+
 ## Ex. Apache(xampp)で起動するhttpd.confの設定例
 
 - httpd.conf
