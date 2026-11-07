@@ -40,23 +40,19 @@ class RssController extends Controller
     public function edit(Request $request){
         $id = $request->input('info_id');
 
+        // 存在しないIDの場合は404
+        $info = RssInfo::findOrFail($id);
+
         if ($request->manual_tags) {
-            $query = RssInfo::find($id);
-            $query->manual_tags = $request->manual_tags;
-            $query->save();
+            $info->manual_tags = $request->manual_tags;
         }
         if ($request->access) {
-            $query = RssInfo::find($id);
-            $query->access = $request->access;
-            $query->save();
+            $info->access = $request->access;
         }
         if ($request->crawl_flag) {
-            $query = RssInfo::find($id);
-            $query->crawl_flag = $request->crawl_flag;
-            $query->save();
+            $info->crawl_flag = $request->crawl_flag;
         }
-
-        $info = RssInfo::find($id);
+        $info->save();
 
         return view('rss.edit',compact('info'));
     }
@@ -64,13 +60,10 @@ class RssController extends Controller
 	// 一覧検索画面
     public function search(Request $request){
 
-        $keyword = '';
+        //キーワードを配列化する（未指定の場合は空文字）
+        $keyword = is_string($request->input('k')) ? $request->input('k') : '';
+        $keywordArray = keywordSplit($keyword);
 
-        if ($request) {
-            //キーワードを配列化する
-            $keyword = $request->k;
-            $keywordArray = keywordSplit($keyword);
-        }
         $query = RssInfo::query();
 
         //検索条件
@@ -98,12 +91,10 @@ class RssController extends Controller
     // feed一覧画面
     public function feedlist(Request $request){
 
-        $keyword = '';
-        if ($request) {
-            //キーワードを配列化する
-            $keyword = $request->k;
-            $keywordArray = keywordSplit($keyword);
-        }
+        //キーワードを配列化する（未指定の場合は空文字）
+        $keyword = is_string($request->input('k')) ? $request->input('k') : '';
+        $keywordArray = keywordSplit($keyword);
+
         $query = RssFeed::select([
                     'info.title as info_title',
                     'feed.title as title',
@@ -147,7 +138,7 @@ class RssController extends Controller
     }
 }
 
-function keywordSplit($text) {
+function keywordSplit(string $text): array {
     $text = preg_replace('/　/',' ',$text);
     $text = preg_replace('/\s+/',' ',$text);
     $keywordArray = explode(' ', $text);
